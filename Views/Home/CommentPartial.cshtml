@@ -1,0 +1,9 @@
+@using TheWall.Models
+@model CommentHelper
+
+
+<form asp-action="NewComment" asp-controller="Home" method="POST">
+    <span asp-validation-for="CommentContent"></span>
+    <textarea asp-for="CommentContent"></textarea>
+    <button type="submit">Post a comment</button>
+</form>

@@ -1,0 +1,14 @@
+@using TheWall.Models
+@model LoginUser
+
+<form asp-action="Login" asp-controller="Home" method="POST">
+    <span asp-validation-for="Email"></span>
+    <label asp-for="Email"></label>
+    <input type="text"asp-for="Email">
+
+    <span asp-validation-for="Password"></span>
+    <label asp-for="Password"></label>
+    <input type="password" asp-for="Password">
+
+    <button type="submit">Login</button>
+</form>

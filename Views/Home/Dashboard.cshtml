@@ -1,0 +1,35 @@
+@using TheWall.Models
+@model CommentHelper
+
+<h1>CodingDojo Wall</h1>
+
+<h3>Welcome @ViewBag.User.FirstName @ViewBag.User.LastName</h3>
+
+<a href="/logout">Sign Out</a>
+
+<hr>
+<h2>Post a message</h2>
+
+<partial name="MessagePartial" />
+
+<hr>
+
+@foreach (var message in @ViewBag.Messages){
+    @message.CreatorOfMessage.FirstName @message.CreatorOfMessage.LastName 
+    @message.CreatedAt.ToString("MMM dd yyyy")
+    <p>@message.MessageContent</p>
+
+    @foreach (var comment in @message.CommentsPostedOnMessage) {
+        @comment.CreatorOfCommment.FirstName @comment.CreatorOfCommment.LastName
+        @comment.CreatedAt.ToString("MMM dd yyyy")
+        <p>@comment.CommentContent</p>
+    }
+
+    <h3>Post a comment</h3>
+    <form asp-action="NewComment" asp-controller="Home" method="POST">
+        <span asp-validation-for="CommentContent"></span>
+        <textarea asp-for="CommentContent"></textarea>
+        <input asp-for='MessageId' type='hidden' value='@message.MessageId'>
+        <button type="submit">Post a comment</button>
+    </form>
+}
